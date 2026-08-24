@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email & SMS Spam Classifier</title>
+    <!-- Google Fonts: Outfit and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <div class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">🛡️</div>
+            <h1>Spam Shield</h1>
+            <p class="subtitle">AI-Powered Email & SMS Classifier</p>
+        </header>
+
+        <!-- Main Card -->
+        <main class="main-card">
+            <!-- Input Section -->
+            <section class="input-section">
+                <label for="email-text" class="section-label">Enter Message Content</label>
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="email-text" 
+                        placeholder="Type or paste your message here (e.g. email, SMS, promo text)..." 
+                        maxlength="50000"
+                    ></textarea>
+                    <span id="char-count" class="char-counter">0 / 50,000</span>
+                </div>
+
+                <div class="action-row">
+                    <button id="btn-clear" class="btn btn-secondary">Clear</button>
+                    <button id="btn-analyze" class="btn btn-primary">
+                        <span id="btn-text">Analyze Message</span>
+                        <div id="btn-spinner" class="spinner hidden"></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Quick Examples Section -->
+            <section class="examples-section">
+                <span class="section-label">Quick Templates</span>
+                <div class="examples-grid">
+                    <button class="example-btn ham" data-text="Hey! Are we still meeting for lunch today at 12:30? Let me know if you can make it, otherwise we can reschedule for tomorrow.">
+                        🥗 Safe: Lunch Plan
+                    </button>
+                    <button class="example-btn ham" data-text="Dear professor, I was late to the lecture today due to a traffic delay on the highway. I will submit the lab report by this evening.">
+                        🎓 Safe: Class Update
+                    </button>
+                    <button class="example-btn spam" data-text="CONGRATULATIONS! You have won a $1000 Walmart gift card! Click here to claim your reward now: http://fake-link-walmart.com. Expires in 24 hours!">
+                        🎁 Spam: Gift Card
+                    </button>
+                    <button class="example-btn spam" data-text="Double your income overnight! Click this link to join our exclusive crypto matrix masterclass and start earning $5000 a day! URGENT!">
+                        📈 Spam: Crypto Scam
+                    </button>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section id="result-card" class="result-section hidden">
+                <hr class="divider">
+                <div class="result-layout">
+                    <!-- Gauge Container -->
+                    <div class="gauge-container">
+                        <svg class="radial-gauge" viewBox="0 0 120 120">
+                            <!-- Background Circle -->
+                            <circle class="gauge-bg" cx="60" cy="60" r="50"></circle>
+                            <!-- Foreground Circle -->
+                            <circle id="gauge-fill" class="gauge-fill" cx="60" cy="60" r="50" style="stroke-dashoffset: 314.16;"></circle>
+                        </svg>
+                        <div class="gauge-text">
+                            <span id="percentage-val">0%</span>
+                            <span class="label-prob">Probability</span>
+                        </div>
+                    </div>
+
+                    <!-- Details Container -->
+                    <div class="result-details">
+                        <div class="badge-row">
+                            <span id="prediction-badge" class="badge">UNKNOWN</span>
+                        </div>
+                        <h3 id="result-title">Analysis Result</h3>
+                        <p id="result-desc">Submit a message to view the spam analysis.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Powered by Logistic Regression (Balanced Class Weights) &bull; Accurate to 97.76%</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
